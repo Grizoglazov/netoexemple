@@ -16,8 +16,8 @@ int main() {
 
 void menu() {
 	
-	bool exit{ true };
-	while (exit) {
+	bool running{ true };
+	while (running) {
 
 		std::cout << "\t\033[38;05;201mВыберите для просмотра номер задачи или нажмите \"0\" для выхода из программы:\033[m\n";
 		std::cout << "\033[38;05;108mЗадача 1. Сумматор.\033[m\n";
@@ -30,7 +30,7 @@ void menu() {
 		switch (choice) {
 		
 		case 0:
-			exit = choice;
+			running = false;
 			break;
 		case 1:
 			task1();
@@ -69,43 +69,22 @@ void task2() {			   // Задача 2. Сумма цифр числа
 	do {
 		std::cout << "\n\033[38;05;67mВведите число чтоб узнать сумму всех его цифр или число \"0\" для выхода\n";
 		std::cin >> number;
-		if ((1000 <= number && 9999 >= number) || (-9999 <= number && -1000 >= number)) 
+		
+		if (number != 0) 
 		{
-			int categoryNumber = number / 100;
-			int numUnit1 = categoryNumber / 10;
-			int numUnit2 = categoryNumber % 10;
-
-			categoryNumber = number % 100;
-			int numUnit3 = categoryNumber / 10;
-			int numUnit4 = categoryNumber % 10;
-
-			int adder = numUnit1 + numUnit2 + numUnit3 + numUnit4;
-			std::cout << "Сумма цифр числа " << number << " равна " << adder << std::endl;
+			int sum{};
+			int categoryUnit = abs(number);
+			while (categoryUnit)
+			{
+				sum += categoryUnit % 10;
+				categoryUnit /= 10;
+			}
+									
+			std::cout << "Сумма цифр числа " << number << " равна " << sum << std::endl;
 		}
-		else if ((100 <= number && 999 >= number) || (-999 <= number && -100 >= number)) 
-		{
-			
-			int numUnit1 = number / 100;
+		
 
-			int categoryNumber = number % 100;
-			int numUnit2 = categoryNumber / 10;
-			int numUnit3 = categoryNumber % 10;
-
-			int adder = numUnit1 + numUnit2 + numUnit3;
-			std::cout << "Сумма цифр числа " << number << " равна " << adder << std::endl;
-		}
-		else if ((10 <= number && 99 >= number) || (-99 <= number && -10 >= number)) 
-		{
-			int numUnit1 = number / 10;
-			int numUnit2 = number % 10;
-
-			int adder = numUnit1 + numUnit2;
-			std::cout << "Сумма цифр числа " << number << " равна " << adder << std::endl;
-		}
-		else 
-			std::cout << "Сумма цифр числа " << number << " равна " << number << std::endl;
-
-	} while (number != 0);
+	} while (number);
 	
 }
 
